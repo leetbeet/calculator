@@ -28,6 +28,8 @@ html, body {
     margin-top: 48px;
     padding-bottom: 4px;
     font-size: 64px;
+    overflow: hidden;         
+    white-space: nowrap;     
     color: white;
 }
 
