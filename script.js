@@ -89,18 +89,20 @@ function writeToDisplay(item, equal=false) {
 }
 
 function del() {
-    if (display.textContent === "ERROR") return;
+    if (display.textContent === "ERROR" || deleteNext) return;
     display.textContent = display.textContent.slice(0, -1);
     if (num2 !== "") {
+        if (num2.at(-1) === ".") dpSecond = false;
         num2 = num2.slice(0, -1);
     } else if (operator !== "") {
         operator = "";
     } else {
+        if (num1.at(-1) === ".") dpFirst = false;
         num1 = num1.slice(0, -1);
     }
 }
 
-function equal() {
+function evaluate() {
     if (num1 !== "" && num2 !== "" && operator !== "") {
         writeToDisplay("", true);
     }
@@ -112,7 +114,7 @@ document.querySelectorAll(".num, .operator, #decimal").forEach(function(button) 
     });
 });
 
-document.querySelector("#equal").addEventListener("click", equal);
+document.querySelector("#equal").addEventListener("click", evaluate);
 
 document.querySelector("#clear").addEventListener("click", function() {
     display.textContent = "";
@@ -131,7 +133,7 @@ document.addEventListener("keydown", function(event) {
         del();
     } else if (event.key === "=" || event.key === "Enter") {
         event.preventDefault();
-        equal();
+        evaluate();
     } else {
         if (event.key === "*") {
             writeToDisplay("×");
