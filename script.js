@@ -27,6 +27,8 @@ function operate(operator, a, b) {
     }
 }
 
+const display = document.querySelector("#display");
+
 let num1 = "";
 let num2 = "";
 let operator = "";
@@ -34,7 +36,6 @@ const nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const operators = ["+", "-", "×", "÷"];
 
 function writeToDisplay(item, equal=false) {
-    const display = document.querySelector("#display");
     if (display.textContent.trim() === "" && (nums.includes(item) || item === "+" || item === "-")) {
         num1 += item;
         display.textContent += item;
@@ -70,5 +71,23 @@ document.querySelectorAll(".num, .operator, #decimal").forEach(function(button) 
 document.querySelector("#equal").addEventListener("click", function() {
     if (num1 !== "" && num2 !== "" && operator !== "") {
         writeToDisplay("", true);
+    }
+});
+
+document.querySelector("#clear").addEventListener("click", function() {
+    display.textContent = "";
+    num1 = "";
+    num2 = "";
+    operator = "";
+});
+
+document.querySelector("#del").addEventListener("click", function() {
+    display.textContent = display.textContent.slice(0, -1);
+    if (num2 !== "") {
+        num2 = num2.slice(0, -1);
+    } else if (operator !== "") {
+        operator = "";
+    } else {
+        num1 = num1.slice(0, -1);
     }
 });
