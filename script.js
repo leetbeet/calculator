@@ -32,10 +32,21 @@ const display = document.querySelector("#display");
 let num1 = "";
 let num2 = "";
 let operator = "";
+let deleteNext = false;
 const nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const operators = ["+", "-", "×", "÷"];
 
 function writeToDisplay(item, equal=false) {
+    if (deleteNext) {
+        if (nums.includes(item)) {
+            num1 = item;
+            display.textContent = item;
+            deleteNext = false;
+            return;
+        } 
+        deleteNext = false;
+    }
+    
     if (display.textContent.trim() === "" && (nums.includes(item) || item === "+" || item === "-")) {
         num1 += item;
         display.textContent += item;
@@ -56,11 +67,10 @@ function writeToDisplay(item, equal=false) {
             num2 = "";
             operator = item;
             display.textContent = num1 + operator;
+            if (equal) deleteNext = true;
         }
     }
 }
-
-
 
 document.querySelectorAll(".num, .operator, #decimal").forEach(function(button) {
     button.addEventListener("click", function() {
