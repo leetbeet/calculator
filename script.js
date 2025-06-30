@@ -26,3 +26,14 @@ function operate(operator, a, b) {
             return divide(a, b);
     }
 }
+
+function writeToDisplay(item) {
+    const display = document.querySelector("#display");
+    display.textContent += item;
+}
+
+document.querySelectorAll(".num, .operator, #decimal").forEach(function(button) {
+    button.addEventListener("click", function() {
+        writeToDisplay(button.textContent);
+    });
+});
