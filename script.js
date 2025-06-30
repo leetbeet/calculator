@@ -23,6 +23,7 @@ function operate(operator, a, b) {
         case "×":
             return multiply(a, b);
         case "÷":
+            if (b === 0) return "ERROR";
             return divide(a, b);
     }
 }
@@ -39,6 +40,14 @@ const nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const operators = ["+", "-", "×", "÷"];
 
 function writeToDisplay(item, equal=false) {
+    if (display.textContent === "ERROR") {
+        if (nums.includes(item)) {
+            display.textContent = "";
+        } else {
+            return;
+        }
+    }
+
     if (deleteNext) {
         if (nums.includes(item) || item === ".") {
             num1 = item;
@@ -105,6 +114,7 @@ document.querySelector("#clear").addEventListener("click", function() {
 });
 
 document.querySelector("#del").addEventListener("click", function() {
+    if (display.textContent === "ERROR") return;
     display.textContent = display.textContent.slice(0, -1);
     if (num2 !== "") {
         num2 = num2.slice(0, -1);
