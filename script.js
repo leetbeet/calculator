@@ -40,13 +40,7 @@ const nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const operators = ["+", "-", "×", "÷"];
 
 function writeToDisplay(item, equal=false) {
-    if (display.textContent === "ERROR") {
-        if (nums.includes(item)) {
-            display.textContent = "";
-        } else {
-            return;
-        }
-    }
+    if (display.textContent === "ERROR") return;
 
     if (deleteNext) {
         if (nums.includes(item) || item === ".") {
@@ -94,26 +88,7 @@ function writeToDisplay(item, equal=false) {
     }
 }
 
-document.querySelectorAll(".num, .operator, #decimal").forEach(function(button) {
-    button.addEventListener("click", function() {
-        writeToDisplay(button.textContent);
-    });
-});
-
-document.querySelector("#equal").addEventListener("click", function() {
-    if (num1 !== "" && num2 !== "" && operator !== "") {
-        writeToDisplay("", true);
-    }
-});
-
-document.querySelector("#clear").addEventListener("click", function() {
-    display.textContent = "";
-    num1 = "";
-    num2 = "";
-    operator = "";
-});
-
-document.querySelector("#del").addEventListener("click", function() {
+function del() {
     if (display.textContent === "ERROR") return;
     display.textContent = display.textContent.slice(0, -1);
     if (num2 !== "") {
@@ -123,4 +98,48 @@ document.querySelector("#del").addEventListener("click", function() {
     } else {
         num1 = num1.slice(0, -1);
     }
+}
+
+function equal() {
+    if (num1 !== "" && num2 !== "" && operator !== "") {
+        writeToDisplay("", true);
+    }
+}
+
+document.querySelectorAll(".num, .operator, #decimal").forEach(function(button) {
+    button.addEventListener("click", function() {
+        writeToDisplay(button.textContent);
+    });
 });
+
+document.querySelector("#equal").addEventListener("click", equal);
+
+document.querySelector("#clear").addEventListener("click", function() {
+    display.textContent = "";
+    num1 = "";
+    num2 = "";
+    dpFirst = false;
+    dpSecond = false;
+    deleteNext = false;
+    operator = "";
+});
+
+document.querySelector("#del").addEventListener("click", del);
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Backspace") {
+        del();
+    } else if (event.key === "=" || event.key === "Enter") {
+        event.preventDefault();
+        equal();
+    } else {
+        if (event.key === "*") {
+            writeToDisplay("×");
+        } else if (event.key === "/") {
+            writeToDisplay("÷");
+        } else {
+            writeToDisplay(event.key);
+        }
+    }
+});
+
