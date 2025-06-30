@@ -11,7 +11,7 @@ A basic browser based calculator built with HTML, CSS and JavaScript.
 ## Technologies Used
 - HTML5  
 - CSS3 (Flexbox layout, custom styling)
-- Vanilla JavaScript (DOM manipulation, event handling)
+- JavaScript (DOM manipulation, event handling)
 
 ## Live Demo
 https://leetbeet.github.io/calculator/
