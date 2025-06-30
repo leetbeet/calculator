@@ -1,17 +1,17 @@
 function add(a, b) {
-    return parseFloat((a + b).toFixed(3)).toString();
+    return Number((a + b).toFixed(3)).toString();
 }
 
 function subtract(a, b) {
-    return parseFloat((a - b).toFixed(3)).toString();
+    return Number((a - b).toFixed(3)).toString();
 }
 
 function multiply(a, b) {
-    return parseFloat((a * b).toFixed(3)).toString();
+    return Number((a * b).toFixed(3)).toString();
 }
 
 function divide(a, b) {
-    return parseFloat((a / b).toFixed(3)).toString();
+    return Number((a / b).toFixed(3)).toString();
 }
 
 function operate(operator, a, b) {
