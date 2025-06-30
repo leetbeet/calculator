@@ -33,12 +33,14 @@ let num1 = "";
 let num2 = "";
 let operator = "";
 let deleteNext = false;
+let dpFirst = false;
+let dpSecond = false;
 const nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const operators = ["+", "-", "×", "÷"];
 
 function writeToDisplay(item, equal=false) {
     if (deleteNext) {
-        if (nums.includes(item)) {
+        if (nums.includes(item) || item === ".") {
             num1 = item;
             display.textContent = item;
             deleteNext = false;
@@ -47,9 +49,10 @@ function writeToDisplay(item, equal=false) {
         deleteNext = false;
     }
     
-    if (display.textContent.trim() === "" && (nums.includes(item) || item === "+" || item === "-")) {
+    if (display.textContent.trim() === "" && (nums.includes(item) || item === "+" || item === "-" || item === ".")) {
         num1 += item;
         display.textContent += item;
+        if (item === ".") dpFirst = true;
     } else if (num1 !== "" && operator === "") {
         if (operators.includes(item)) {
             operator = item;
@@ -57,17 +60,27 @@ function writeToDisplay(item, equal=false) {
         } else if (nums.includes(item)) {
             num1 += item;
             display.textContent += item;
+        } else if (item === "." && !dpFirst) {
+            num1 += item;
+            display.textContent += item;
+            dpFirst = true;
         }
     } else {
         if (nums.includes(item)) {
             num2 += item;
-            display.textContent += item
+            display.textContent += item;
         } else if ((operators.includes(item) && num2 !== "") || equal) {
             num1 = (operate(operator, Number(num1), Number(num2)));
             num2 = "";
+            if (Number.isInteger(Number(num1))) dpFirst = false;
+            dpSecond = false;
             operator = item;
             display.textContent = num1 + operator;
             if (equal) deleteNext = true;
+        } else if (item === "." && !dpSecond) {
+            num2 += item;
+            display.textContent += item;
+            dpSecond = true;
         }
     }
 }
