@@ -14,4 +14,4 @@ A basic browser based calculator built with HTML, CSS and JavaScript.
 - Vanilla JavaScript (DOM manipulation, event handling)
 
 ## Live Demo
-https://leetbeet.github.io/calculator/https://leetbeet.github.io/calculator
+https://leetbeet.github.io/calculator/
