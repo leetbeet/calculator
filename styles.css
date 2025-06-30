@@ -1,0 +1,62 @@
+html, body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: lightgray;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 75%;
+    border-radius: 8px;
+    background-color: black;
+    padding: 12px;
+    padding-bottom: 16px;
+}
+
+#display {
+    display: flex;
+    justify-content: right;
+    align-items: end;
+    margin-top: 48px;
+    padding-bottom: 4px;
+    font-size: 64px;
+    color: white;
+}
+
+.inner {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    margin: 2.5px;
+    border-radius: 16px;
+    color: white;
+    font-size: 40px;
+    background-color: rgb(80, 80, 80);
+    border: none;
+    outline: none;
+}
+
+button:active {
+      filter: brightness(70%);
+}
+
+#clear, #del {
+    color: black;
+    background-color: rgb(212, 212, 212);
+}
+
+.operator {
+    background-color: rgb(255, 149, 0);
+}
